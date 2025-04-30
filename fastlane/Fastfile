@@ -1,0 +1,31 @@
+# frozen_string_literal: true
+
+default_platform(:android)
+
+platform :android do
+  desc 'Run unit & instrumentation tests'
+  lane(:test) do
+    test_android
+  end
+
+  desc 'Build & deploy AAB to Google Play (includes metadata)'
+  lane(:deploy) do |options|
+    deploy_android(
+      flavor: options[:flavor] || ENV.fetch('FLAVOR'),
+      package_name: options[:package_name] || ENV.fetch('PACKAGE_NAME'),
+      json_key: options[:json_key] || ENV.fetch('JSON_KEY'),
+      track: options[:track] || 'production',
+      rollout: options[:rollout] || '0.05',
+      validate_only: options[:validate_only] || false
+    )
+  end
+
+  desc 'Push Play Store metadata'
+  lane(:metadata) do |options|
+    metadata_android(
+      json_key: options[:json_key] || ENV.fetch('JSON_KEY'),
+      package_name: options[:package_name] || ENV.fetch('PACKAGE_NAME'),
+      validate_only: options[:validate_only] || false
+    )
+  end
+end
