@@ -8,6 +8,7 @@ describe Fastlane::Actions::MetadataAndroidAction do
       params = {
         package_name: 'org.fossify.app',
         json_key: 'path/to/key.json',
+        track: 'production',
         validate_only: false
       }
 
@@ -16,6 +17,7 @@ describe Fastlane::Actions::MetadataAndroidAction do
                 metadata_path: 'fastlane/metadata/android',
                 package_name: 'org.fossify.app',
                 json_key: 'path/to/key.json',
+                track: 'production',
                 skip_upload_aab: true,
                 skip_upload_apk: true,
                 validate_only: false
