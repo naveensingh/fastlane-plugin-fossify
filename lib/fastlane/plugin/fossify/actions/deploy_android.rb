@@ -7,11 +7,6 @@ module Fastlane
     class DeployAndroidAction < Action
       def self.run(params)
         flavor = params[:flavor]
-        package_name = params[:package_name]
-        json_key = params[:json_key]
-        track = params[:track]
-        rollout = params[:rollout]
-        dryrun = params[:validate_only]
         build_type = 'Release'
         variant = "#{flavor}#{build_type}"
         Actions::GradleAction.run(
@@ -30,14 +25,15 @@ module Fastlane
         UI.message("AAB found at #{aab_path}")
 
         Actions::UploadToPlayStoreAction.run(
-          rollout:,
+          rollout: params[:rollout],
           aab: aab_path,
-          package_name:,
-          json_key:,
+          package_name: params[:package_name],
+          json_key: params[:json_key],
+          metadata_path: params[:metadata_path],
           skip_upload_apk: true,
           skip_upload_metadata: false,
-          track:,
-          validate_only: dryrun
+          track: params[:track],
+          validate_only: params[:validate_only]
         )
       end
 
@@ -46,6 +42,7 @@ module Fastlane
           opt(:flavor, required: true),
           opt(:package_name, required: true),
           opt(:json_key, required: true),
+          opt(:metadata_path, required: false, default_value: 'fastlane/metadata/android'),
           opt(:track, required: false, default_value: 'production'),
           opt(:rollout, required: false, default_value: '0.05'),
           opt(:validate_only, required: false, type: Boolean, default_value: false)
