@@ -9,6 +9,7 @@ describe Fastlane::Actions::DeployAndroidAction do
         flavor: 'foss',
         package_name: 'org.fossify.app',
         json_key: 'path/to/key.json',
+        metadata_path: 'fastlane/metadata/android',
         track: 'production',
         rollout: '0.05',
         validate_only: false
@@ -26,6 +27,7 @@ describe Fastlane::Actions::DeployAndroidAction do
                 aab: '/tmp/myapp/app/build/outputs/bundle/fossRelease/app.aab',
                 package_name: 'org.fossify.app',
                 json_key: 'path/to/key.json',
+                metadata_path: 'fastlane/metadata/android',
                 track: 'production',
                 rollout: '0.05',
                 skip_upload_apk: true,

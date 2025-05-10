@@ -7,7 +7,9 @@ describe Fastlane::Actions::MetadataAndroidAction do
     it 'uploads metadata to Play Store' do
       params = {
         package_name: 'org.fossify.app',
+        version_code: 123,
         json_key: 'path/to/key.json',
+        metadata_path: 'fastlane/metadata/android',
         track: 'production',
         validate_only: false
       }
@@ -16,6 +18,7 @@ describe Fastlane::Actions::MetadataAndroidAction do
         .with(hash_including(
                 metadata_path: 'fastlane/metadata/android',
                 package_name: 'org.fossify.app',
+                version_code: 123,
                 json_key: 'path/to/key.json',
                 track: 'production',
                 skip_upload_aab: true,
