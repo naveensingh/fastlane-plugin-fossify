@@ -28,6 +28,7 @@ describe Fastlane::Actions::DeployAndroidAction do
                 package_name: 'org.fossify.app',
                 json_key: 'path/to/key.json',
                 metadata_path: 'fastlane/metadata/android',
+                release_status: 'completed',
                 track: 'production',
                 rollout: '0.05',
                 skip_upload_apk: true,

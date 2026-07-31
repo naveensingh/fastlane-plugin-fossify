@@ -30,6 +30,7 @@ module Fastlane
           package_name: params[:package_name],
           json_key: params[:json_key],
           metadata_path: params[:metadata_path],
+          release_status: 'completed',
           skip_upload_apk: true,
           skip_upload_metadata: false,
           track: params[:track],
